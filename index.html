@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087b3c">
+  <title>Instale o Amazônia Agora</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f2;
+      color: #202820;
+      text-align: center;
+    }
+    header {
+      background: #087b3c;
+      color: white;
+      padding: 35px 15px;
+    }
+    h1 { font-size: 32px; margin: 0; }
+    header p { font-size: 17px; }
+    main {
+      max-width: 520px;
+      margin: 35px auto;
+      padding: 25px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 4px 20px #00000015;
+    }
+    .logo {
+      font-size: 55px;
+      margin-bottom: 12px;
+    }
+    h2 { color: #087b3c; }
+    .btn {
+      display: block;
+      background: #087b3c;
+      color: white;
+      padding: 17px;
+      margin: 20px 0;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 19px;
+      font-weight: bold;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+    .btn:hover { background: #065d2d; }
+    .secondary { background: #b52028; }
+    .secondary:hover { background: #921b21; }
+    .instructions {
+      background: #edf7ef;
+      padding: 18px;
+      border-radius: 12px;
+      line-height: 1.7;
+      text-align: left;
+    }
+    footer {
+      padding: 20px;
+      color: #666;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AMAZÔNIA AGORA</h1>
+    <p>A notícia na palma da sua mão</p>
+  </header>
+
+  <main>
+    <div class="logo">📱</div>
+    <h2>Instale nosso aplicativo</h2>
+    <p>
+      Acompanhe as principais notícias do Acre,
+      da Amazônia e do Brasil.
+    </p>
+
+    <button class="btn" id="installBtn">
+      📲 Instalar aplicativo
+    </button>
+
+    <a class="btn secondary"
+       href="https://amazoniaagora.com.br/">
+       🌐 Acessar portal de notícias
+    </a>
+
+    <div class="instructions" id="instructions">
+      <strong>Como instalar:</strong>
+      <p>
+        No Android, abra o portal no Chrome,
+        toque no menu ⋮ e procure
+        "Adicionar à tela inicial" ou
+        "Instalar aplicativo".
+      </p>
+      <p>
+        No iPhone, abra no Safari,
+        toque em Compartilhar e escolha
+        "Adicionar à Tela de Início".
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Amazônia Agora.
+    Informação com credibilidade.
+  </footer>
+
+  <script>
+    let deferredPrompt;
+    const installBtn =
+      document.getElementById("installBtn");
+
+    window.addEventListener(
+      "beforeinstallprompt", (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+      }
+    );
+
+    installBtn.addEventListener("click", async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      } else {
+        window.location.href =
+          "https://amazoniaagora.com.br/";
+      }
+    });
+  </script>
+</body>
+</html>
